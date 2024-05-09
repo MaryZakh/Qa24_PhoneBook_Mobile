@@ -9,7 +9,7 @@ public class ContactListScreen extends BaseScreen {
         super(driver);
     }
 
-    @FindBy(xpath = "//*[@id='com.sheygam.contactapp:id/action_bar']/android.widget.TextView")
+    @FindBy(xpath = "//*[@resource-id='com.sheygam.contactapp:id/action_bar']/android.widget.TextView")
     AndroidElement activityTextView;
 
 

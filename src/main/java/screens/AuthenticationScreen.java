@@ -9,17 +9,17 @@ public class AuthenticationScreen extends BaseScreen {
         super(driver);
     }
 
-    @FindBy(xpath = "//*[@id='com.sheygam.contactapp:id/inputEmail']")
+    @FindBy(id="com.sheygam.contactapp:id/inputEmail")
     AndroidElement emailEditText;
 
-    @FindBy(xpath = "//*[@id='com.sheygam.contactapp:id/inputPassword']")
+    @FindBy(id="com.sheygam.contactapp:id/inputPassword")
     AndroidElement passwordEditText;
 
-    @FindBy(xpath = "//*[@id='com.sheygam.contactapp:id/loginBtn']")
+    @FindBy(id="com.sheygam.contactapp:id/loginBtn")
     AndroidElement loginBtn;
 
     public AuthenticationScreen fillEmail(String email) {
-        should(emailEditText,15);
+        should(emailEditText,10);
         type(emailEditText, email);
         return this;
     }

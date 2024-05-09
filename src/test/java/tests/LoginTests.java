@@ -11,7 +11,7 @@ public class LoginTests extends AppiumConfig {
     public void loginSuccess(){
     boolean result = new SplashScreen(driver)
             .checkCurrentVersion("Version 1.0.0")
-            .fillEmail("margo@gmail.com")
+            .fillEmail("mara@gmail.com")
             .fillPassword("Mmar123456$")
             .submitLogin()
             .isActivityTitleDisplayed("Contact list");

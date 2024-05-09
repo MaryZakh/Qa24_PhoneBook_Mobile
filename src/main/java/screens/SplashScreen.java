@@ -12,7 +12,7 @@ public class SplashScreen extends BaseScreen {
     @FindBy(xpath = "//*[@resource-id='com.sheygam.contactapp:id/version_text']")
     AndroidElement versionTextView;
 
-    @FindBy(xpath = "//*[@id = 'com.sheygam.contactapp:id/title_text']")
+    @FindBy(id = "com.sheygam.contactapp:id/title_text")
     AndroidElement titleTextView;
 
     public String getCurrentVersion(){
