@@ -20,6 +20,8 @@ public class ContactListScreen extends BaseScreen {
     AndroidElement activityTextView;
     @FindBy(xpath = "//*[@content-desc = 'More options']")
     AndroidElement menuOptions;
+    @FindBy(xpath = "//*[@content-desc = 'More options']")
+    List<AndroidElement> menuOptionsList;
     @FindBy(xpath = "//*[@text='Logout']")
     AndroidElement logoutBtn;
     @FindBy(xpath = "//*[@content-desc = 'add']")
@@ -47,6 +49,24 @@ public class ContactListScreen extends BaseScreen {
         }
         return new AuthenticationScreen(driver);
     }
+
+    public AuthenticationScreen logout2() {
+        if (isElementDisplayed(menuOptions)) {
+            menuOptions.click();
+            logoutBtn.click();
+        }
+        return new AuthenticationScreen(driver);
+    }
+
+    public AuthenticationScreen logout3() {
+        if (isElementPresentList(menuOptionsList)) {
+            menuOptions.click();
+            logoutBtn.click();
+        }
+        return new AuthenticationScreen(driver);
+    }
+
+
 
     public ContactListScreen isAccountOpened() {
         Assert.assertTrue(isActivityTitleDisplayed("Contact list"));

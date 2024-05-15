@@ -4,10 +4,13 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class BaseScreen {
     AppiumDriver<AndroidElement> driver;
@@ -51,4 +54,22 @@ public class BaseScreen {
         Assert.assertTrue(alert.getText().contains(text));
         alert.accept();
     }
+
+    public boolean isElementDisplayed(AndroidElement element) {
+        try {
+            should(element, 5);
+           return element.isDisplayed();
+        } catch (IllegalAccessError e) {
+            return false;
+        }
+    }
+
+//    public boolean isElementPresentList(By locator){
+//        return driver.findElements(locator).size()>0;
+//    }
+
+    public boolean isElementPresentList(List<AndroidElement>list){
+        return list.size()>0;
+    }
+
 }
