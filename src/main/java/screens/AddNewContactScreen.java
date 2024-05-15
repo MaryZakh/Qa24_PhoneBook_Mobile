@@ -38,9 +38,19 @@ public class AddNewContactScreen extends BaseScreen {
         return this;
     }
 
-    public ContactListScreen submitContactForm(){
+    public ContactListScreen submitContactForm() {
         createBtn.click();
         return new ContactListScreen(driver);
+    }
+
+    public AddNewContactScreen submitContactFormNegative() {
+        createBtn.click();
+        return this;
+    }
+
+    public AddNewContactScreen isErrorContainsText(String text) {
+        checkAlertText(text);
+        return this;
     }
 
 //    public ContactListScreen createContact(Contact contact){

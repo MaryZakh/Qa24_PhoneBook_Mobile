@@ -1,8 +1,11 @@
 package screens;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -23,6 +26,10 @@ public class ContactListScreen extends BaseScreen {
     AndroidElement plusBtn;
     @FindBy(xpath = "//*[@resource-id='com.sheygam.contactapp:id/rowName']")
     List<AndroidElement> contactNameList;
+    @FindBy(xpath = "//*[@resource-id='com.sheygam.contactapp:id/rowContainer']")
+    List<AndroidElement>contactList;
+    @FindBy(id="android:id/button1")
+    AndroidElement yesBtn;
 
 
     public boolean isActivityTitleDisplayed(String text) {
@@ -44,7 +51,7 @@ public class ContactListScreen extends BaseScreen {
     }
 
     public AddNewContactScreen openContactForm() {
-        isShouldHave(activityTextView, "Contact list", 10);
+        if (activityTextView.getText().equals("Contact list"))
         plusBtn.click();
         return new AddNewContactScreen(driver);
     }
@@ -52,6 +59,7 @@ public class ContactListScreen extends BaseScreen {
     public ContactListScreen isContactAddedByName(String name, String lastName) {
 //        List<AndroidElement> list = driver.findElements(By.id());
         isShouldHave(activityTextView, "Contact list", 10);
+        System.out.println("size of list-->"+contactNameList.size());
         boolean isPresent = false;
         for (AndroidElement element : contactNameList) {
             if (element.getText().equals(name + " " + lastName)) {
@@ -60,6 +68,23 @@ public class ContactListScreen extends BaseScreen {
             }
         }
         Assert.assertTrue(isPresent);
+        return this;
+    }
+
+    public ContactListScreen deleteFirstContact(){
+        isActivityTitleDisplayed("Contact list");
+        AndroidElement first = contactList.get(0);
+        Rectangle rectangle = first.getRect();
+        int xFrom=rectangle.getX()+rectangle.getWidth()/8;
+        int y= rectangle.getY()+rectangle.getHeight()/2;
+        int xTo=rectangle.getX()+(rectangle.getWidth()/8)*7;
+        //int xTo = rectangle.getWidth()-xFrom;
+        TouchAction<?> touchAction = new TouchAction<>(driver);
+        touchAction.longPress(PointOption.point(xFrom,y))
+                .moveTo(PointOption.point(xTo,y)).release().perform();
+
+
+
         return this;
     }
 }
