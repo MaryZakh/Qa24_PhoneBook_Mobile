@@ -30,7 +30,8 @@ public class ContactListScreen extends BaseScreen {
     List<AndroidElement>contactList;
     @FindBy(id="android:id/button1")
     AndroidElement yesBtn;
-
+    int countBefore;
+    int countAfter;
 
     public boolean isActivityTitleDisplayed(String text) {
         //return activityTextView.getText().contains("Contact list");
@@ -73,6 +74,9 @@ public class ContactListScreen extends BaseScreen {
 
     public ContactListScreen deleteFirstContact(){
         isActivityTitleDisplayed("Contact list");
+
+        countBefore=contactList.size();
+        System.out.println(countBefore);
         AndroidElement first = contactList.get(0);
         Rectangle rectangle = first.getRect();
         int xFrom=rectangle.getX()+rectangle.getWidth()/8;
@@ -83,8 +87,16 @@ public class ContactListScreen extends BaseScreen {
         touchAction.longPress(PointOption.point(xFrom,y))
                 .moveTo(PointOption.point(xTo,y)).release().perform();
 
+        should(yesBtn,10);
+        yesBtn.click();
+        pause(3000);
+        countAfter=contactList.size();
+        System.out.println(countAfter);
+        return this;
+    }
 
-
+    public ContactListScreen isListSizeLessOnOne() {
+        Assert.assertEquals(countBefore-countAfter,1);
         return this;
     }
 }
